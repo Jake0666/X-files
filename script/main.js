@@ -1,35 +1,49 @@
 (function () {
 
-var theImages = document.querySelectorAll(".image-holder"),
-    heading = document.querySelector(".heading"),
-    subheading = document.querySelector(".main-copy h2"),
-    theSeasonText = document.querySelector(".main-copy p"),
-    appliedClass;
+// var theImages = document.querySelectorAll(".image-holder"),
+//     heading = document.querySelector(".heading"),
+//     subheading = document.querySelector(".main-copy h2"),
+//     theSeasonText = document.querySelector(".main-copy p"),
+    // appliedClass;
+
+    var $theImages = $('.image-holder'),
+        $heading = $('.heading'),
+        $subheading = $('.main-copy h2'),
+        $theSeasonText = $('.main-copy p'),
+        appliedClass;
 
     function changeElements() {
-      heading.classList.remove(appliedClass);
-      subheading.classList.remove(appliedClass);
+      $heading.removeClass(appliedClass);
+      $subheading.removeClass(appliedClass);
 
-        appliedClass = this.id;
+        appliedClass = event.currentTarget.id;
 
-        heading.classList.add(this.id);
-        subheading.classList.add(this.id);
+        $heading.addClass(event.currentTarget.id);
+        $subheading.addClass(event.currentTarget.id);
 
-        heading.firstChild.nodeValue = dynamicContent[this.id].headline;
-        theSeasonText.firstChild.nodeValue = dynamicContent[this.id].text;
+        $heading.text(dynamicContent[event.currentTarget.id].headline);
+        $theSeasonText.text(dynamicContent[event.currentTarget.id].text);
     }
 
-    function load(){
-      heading.firstChild.nodeValue = dynamicContent["spring"].headline;
-      theSeasonText.firstChild.nodeValue = dynamicContent["spring"].text;
+    $theImages.click(function(){
+      changeElements()
+    })
 
-    }
 
-    [].forEach.call(theImages, function(image){
-          image.addEventListener('click', changeElements, true);
-    });
+    // $theImages.click(function() {
+    //     console.log('clicked');
+    // })
 
-    window.addEventListener('load', load, false);
+    //  function load(){
+    //    $heading.firstChild.nodeValue = dynamicContent["spring"].headline;
+    //    $theSeasonText.firstChild.nodeValue = dynamicContent["spring"].text;
+     //
+    //  }
 
+    // [].forEach.call(theImages, function(image){
+    //       image.addEventListener('click', changeElements, true);
+    // });
+
+    //  window.addEventListener('load', load, false);
 
 })();
